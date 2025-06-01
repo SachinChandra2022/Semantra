@@ -1,6 +1,8 @@
 scrapy
-spacy
-trafilatura
 beautifulsoup4
 lxml
-indexer
+spacy
+trafilatura
+faiss-cpu
+sentence-transformers
+streamlit 
