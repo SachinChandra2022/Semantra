@@ -1,0 +1,12 @@
+https://en.wikipedia.org/wiki/Main_Page
+https://stackoverflow.com/
+https://www.geeksforgeeks.org/
+https://towardsdatascience.com/
+https://www.kaggle.com/
+https://developer.mozilla.org/
+https://realpython.com/
+https://www.w3schools.com/
+https://news.ycombinator.com/
+https://arxiv.org/
+https://medium.com/
+https://www.reddit.com/

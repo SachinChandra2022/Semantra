@@ -1,0 +1,6 @@
+scrapy
+spacy
+trafilatura
+beautifulsoup4
+lxml
+indexer
