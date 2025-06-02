@@ -7,7 +7,9 @@ import backend.preprocess_utils  # Change this based on your actual file/module 
 RAW_DATA_DIR = 'data/raw'
 PROCESSED_DATA_DIR = 'data/processed'
 os.makedirs(PROCESSED_DATA_DIR, exist_ok=True)
-
+#directory structure:
+# data/
+# ├── raw/
 def preprocess_all_files():
     print(f"Checking for files in: {os.path.abspath(RAW_DATA_DIR)}")
 
