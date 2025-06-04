@@ -24,7 +24,7 @@ def remove_stopwords_and_lemmatize(text):
     doc = nlp(text)
     tokens = [token.lemma_ for token in doc if not token.is_stop and not token.is_punct]
     return " ".join(tokens)
-#process_html function to handle both HTML and plain text content
+
 def preprocess_html(content):
     text = extract_main_text(content)
     text = normalize_text(text)
