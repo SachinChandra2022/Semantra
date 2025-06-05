@@ -1,5 +1,6 @@
 scrapy
 beautifulsoup4
+numpy
 lxml
 spacy
 trafilatura

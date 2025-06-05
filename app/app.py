@@ -4,23 +4,44 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import streamlit as st
 from backend.embedding_utils import embed_texts
 from backend.search_utils import FaissIndex
-import os
 import pickle
+
+# ---- Paths ----
+index_path = "embedding/faiss_index.bin"
+docs_path = "embedding/docs.pkl"
+documents_dir = "data/"  # adjust this to wherever your raw docs are stored
+
+# ---- Auto Indexing Function ----
+def build_faiss_index():
+    st.warning("FAISS index or document store not found. Building now...")
+
+    from backend.preprocess import load_and_split_documents  # Your custom loader
+    from backend.embedding_utils import embed_texts
+
+    docs = load_and_split_documents(documents_dir)
+    embeddings = embed_texts([doc['content'] for doc in docs])  # Assuming dicts with 'content'
+
+    dim = embeddings.shape[1]
+    faiss_index = FaissIndex(dim)
+    faiss_index.add(embeddings, [doc['content'] for doc in docs])
+
+    # Save
+    faiss_index.save(index_path)
+    with open(docs_path, "wb") as f:
+        pickle.dump([doc['content'] for doc in docs], f)
+
+    st.success("Indexing complete.")
 
 # ---- Load FAISS index and document store ----
 @st.cache_resource
 def load_index():
-    index_path = "embedding/faiss_index.bin"
-    docs_path = "embedding/docs.pkl"
-
     if not os.path.exists(index_path) or not os.path.exists(docs_path):
-        st.error("FAISS index or document store not found. Please run indexing first.")
-        st.stop()
+        build_faiss_index()
 
     with open(docs_path, "rb") as f:
         docs = pickle.load(f)
 
-    dim = 384  # Assuming SentenceTransformer 'all-MiniLM-L6-v2'
+    dim = 384  # For SentenceTransformer 'all-MiniLM-L6-v2'
     faiss_index = FaissIndex(dim)
     faiss_index.load(index_path)
     faiss_index.documents = docs

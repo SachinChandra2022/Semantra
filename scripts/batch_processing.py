@@ -30,7 +30,7 @@ def preprocess_all_files():
             with open(input_path, 'r', encoding='utf-8') as file:
                 html_content = file.read()
 
-            clean_text = preprocess_utils.preprocess_html(html_content)
+            clean_text = backend.preprocess_utils.preprocess_html(html_content)
             print(f"Cleaned text preview (first 200 chars):\n{clean_text[:200]}")  # Preview output
 
             with open(output_path, 'w', encoding='utf-8') as file:
